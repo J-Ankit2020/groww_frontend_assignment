@@ -102,7 +102,7 @@ export default function CheckoutSummary() {
         onClick={checkoutHandler}
         mt={{ base: '7', md: 10 }}
         mx={'auto'}
-        disabled={products.length === 0}
+        isDisabled={products.length === 0}
         w={{ base: '98%', md: '85%' }}
       >
         <Icon as={IoLockClosed} mr={1} />

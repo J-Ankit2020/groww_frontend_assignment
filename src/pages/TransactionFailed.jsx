@@ -13,7 +13,10 @@ import { useState } from 'react';
 
 export default function TransactionFailed() {
   const [isLoading, setIsLoading] = useState(false);
+  const products = useProductStore((state) => state.products);
   const navigate = useNavigate();
+  const paymentMethod = useProductStore((state) => state.paymentMode);
+
   const submitHandler = async () => {
     setIsLoading(true);
     setTimeout(() => {
@@ -21,7 +24,7 @@ export default function TransactionFailed() {
       navigate('/');
     }, 800);
   };
-  const paymentMethod = useProductStore((state) => state.paymentMode);
+  if (products.length == 0 || !paymentMethod) return navigate('/');
   return (
     <Box
       mx='auto'

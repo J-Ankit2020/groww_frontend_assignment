@@ -1,12 +1,14 @@
 import { create } from 'zustand';
 import fetchData from '../utils/http';
 import { getTotalCost } from '../utils/validation';
+
 const productStore = (set) => ({
   products: [],
   paymentMethods: [],
   totalCost: 0,
   isLoading: false,
   paymentMode: '',
+
   merchantData: {},
   fetchProducts: async () => {
     try {

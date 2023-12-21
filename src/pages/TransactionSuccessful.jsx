@@ -11,12 +11,16 @@ import {
 } from '@chakra-ui/react';
 import Button1 from '../components/Button';
 import useProductStore from '../store/productStore';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import OrderItem from '../components/TransactionSuccessful/OrderItem';
 import OrderSummaryTable from '../components/TransactionSuccessful/OrderSummaryTable';
 
 export default function TransactionSuccessful() {
   const products = useProductStore((state) => state.products);
+  const mode = useProductStore((state) => state.paymentMode);
+  const navigate = useNavigate();
+
+  if (products.length == 0 || !mode) return navigate('/');
 
   return (
     <Stack w='full' flexDirection={{ base: 'column', md: 'row' }}>
