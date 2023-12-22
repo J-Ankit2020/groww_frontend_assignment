@@ -84,18 +84,11 @@ export default function CreditCardForm() {
         />
         <FormErrorMessage>Card number is invalid</FormErrorMessage>
       </FormControl>
-      <HStack
-        mt='2'
-        justifyContent='space-around'
-        align='center'
-        gap='6'
-        border='2px solid white'
-      >
+      <HStack mt='2' justifyContent='space-around' align='center' gap='6'>
         <VStack
           align='center'
           justify='center'
           display='flex'
-          border='2px solid white'
           justifyContent='center'
         >
           <FormControl textColor='brand.foreground' isInvalid={error.cvv}>
@@ -111,7 +104,6 @@ export default function CreditCardForm() {
           </FormControl>
         </VStack>
         <VStack
-          border='2px solid white'
           isInvalid={error.cvv}
           display='flex'
           align='center'
