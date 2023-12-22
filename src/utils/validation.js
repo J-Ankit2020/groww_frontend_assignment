@@ -48,13 +48,17 @@ export const validateExpiryDate = (month, year) => {
   const numericMonth = parseInt(cleanedMonth, 10);
   const numericYear = parseInt(cleanedYear, 10);
 
-  // Check if the month is between 1 and 12 and the year is in the future
-  const currentYear = new Date().getFullYear() % 100; // Get the last two digits of the current year
+  // Get the current date
+  const currentDate = new Date();
+
+  // Check if the month is between 1 and 12, the year is in the future,
+  // and the date is in the next month or later
   return (
     numericMonth >= 1 &&
     numericMonth <= 12 &&
-    numericYear >= currentYear &&
-    numericYear <= currentYear + 20 // Assuming the card is valid for the next 20 years
+    numericYear >= currentDate.getFullYear() % 100 &&
+    (numericYear > currentDate.getFullYear() % 100 ||
+      numericMonth > currentDate.getMonth() + 1) // Check if the month is next month or later
   );
 };
 

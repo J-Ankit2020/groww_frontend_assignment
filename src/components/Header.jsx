@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Image } from '@chakra-ui/react';
 import useProductStore from '../store/productStore';
 const Header = () => {
   const merchantData = useProductStore((state) => state.merchantData);
+
   return (
     <Box
       as='header'
@@ -20,6 +21,7 @@ const Header = () => {
           alt='Merchant Logo'
           fallbackSrc='https://www.groww.in/groww-logo-270.png'
         />
+
         <Heading size='md' ml={3}>
           {merchantData?.merchantName || 'GROWW'}
         </Heading>

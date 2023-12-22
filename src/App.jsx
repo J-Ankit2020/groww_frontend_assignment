@@ -18,7 +18,7 @@ function App() {
   });
   const fetchProducts = useProductStore((state) => state.fetchProducts);
   useEffect(() => {
-    async function fetchMerch() {
+    async function fetchMerchantData() {
       const { theme } = await fetchProducts();
       setTheme({
         background: theme['--background'],
@@ -27,7 +27,7 @@ function App() {
         'primary-foreground': theme['--primary-foreground'],
       });
     }
-    fetchMerch();
+    fetchMerchantData();
   }, [fetchProducts]);
 
   const router = createBrowserRouter([
