@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import useProductStore from './store/productStore';
 import TransactionFailed from './pages/TransactionFailed';
 import TransactionSuccessful from './pages/TransactionSuccessful';
+import ErrorPage from './pages/ErrorPage';
 function App() {
   const [theme, setTheme] = useState({
     background: '',
@@ -34,6 +35,7 @@ function App() {
     {
       path: '/',
       element: <CartPage />,
+      errorElement: <ErrorPage />,
     },
     { path: '/pay', element: <Payment /> },
     { path: '/transaction/fail', element: <TransactionFailed /> },

@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import fetchData from '../utils/http';
 import { getTotalCost } from '../utils/validation';
-
 const productStore = (set) => ({
   products: [],
   paymentMethods: [],
