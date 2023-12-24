@@ -61,7 +61,7 @@ export default function CreditCardForm() {
         setPaymentMode('Credit Card');
         setIsLoading(false);
 
-        const isSuccessfull = Math.random() < 0.4;
+        const isSuccessfull = Math.random() < 0.5;
         if (isSuccessfull) return navigate('/transaction/success');
         else return navigate('/transaction/fail');
       }, 800);
