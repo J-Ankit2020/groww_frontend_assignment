@@ -69,6 +69,11 @@ Reloading the home page would fetch a new set of themes.
 
 <img src="./src/assets/payment_failed.png" width="560"/>
 
+
+### 404 Page
+
+<img src="./src/assets/404.png" width="560" />
+
 ### Mobile View
 
 <img src="https://github.com/J-Ankit2020/groww_frontend_assignment/blob/main/src/assets/cart_mobile%20.png" />
