@@ -71,7 +71,7 @@ Reloading the home page would fetch a new set of themes.
 
 ### Mobile View
 
-<img src="./src/assets/cart_mobile.png" />
+<img src="https://github.com/J-Ankit2020/groww_frontend_assignment/blob/main/src/assets/cart_mobile%20.png" />
 
 ## Getting Started
 
@@ -84,7 +84,7 @@ Reloading the home page would fetch a new set of themes.
 1. Clone the repository.
 2. Navigate to the project directory.
 3. Run `npm install` to install dependencies.
-4. Run `npm start` to start the development server.
+4. Run `npm run dev` to start the development server.
 
 ## License
 
