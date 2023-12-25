@@ -4,32 +4,13 @@ import Header from './components/Header';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CartPage from './pages/CartPage';
 import Payment from './pages/Payment';
-
-import { useEffect, useState } from 'react';
-import useProductStore from './store/productStore';
+import useFetchMerchantData from './hooks/useFetchMerchantData'; // Import the custom hook
 import TransactionFailed from './pages/TransactionFailed';
 import TransactionSuccessful from './pages/TransactionSuccessful';
 import ErrorPage from './pages/ErrorPage';
+
 function App() {
-  const [theme, setTheme] = useState({
-    background: '',
-    foreground: '',
-    primary: '',
-    'primary-foreground': '',
-  });
-  const fetchProducts = useProductStore((state) => state.fetchProducts);
-  useEffect(() => {
-    async function fetchMerchantData() {
-      const { theme } = await fetchProducts();
-      setTheme({
-        background: theme['--background'],
-        foreground: theme['--foreground'],
-        primary: theme['--primary'],
-        'primary-foreground': theme['--primary-foreground'],
-      });
-    }
-    fetchMerchantData();
-  }, [fetchProducts]);
+  const theme = useFetchMerchantData(); // Use the custom hook to fetch merchant data
 
   const router = createBrowserRouter([
     {
@@ -41,6 +22,7 @@ function App() {
     { path: '/transaction/fail', element: <TransactionFailed /> },
     { path: '/transaction/success', element: <TransactionSuccessful /> },
   ]);
+
   return (
     <ChakraProvider
       theme={extendTheme({
