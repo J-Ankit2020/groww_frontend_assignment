@@ -9,6 +9,7 @@ This project is a React.js application that leverages Chakra UI for styling and 
 1. **Product and Theme Randomization:**
 
    - Upon opening the page, the user receives a random combination of products and a theme.
+   - User can clear the cache and reload the cart state and theme by pressing the reload button
 
 2. **Checkout Process:**
 
@@ -17,7 +18,6 @@ This project is a React.js application that leverages Chakra UI for styling and 
 3. **Payment Page:**
 
    - The user can switch between payment methods.
-   - If the user reloads the payment page, they are redirected to the home page.
 
 4. **UPI Handling:**
 
@@ -45,9 +45,6 @@ This project is a React.js application that leverages Chakra UI for styling and 
    - After successful payment, the transactionStatus is randomized.
    - Probability of success is 4/10.
 
-## Assumptions
-
-Reloading the home page would fetch a new set of themes.
 
 ## Tech Stack
 
