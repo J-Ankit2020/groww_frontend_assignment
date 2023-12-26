@@ -4,20 +4,9 @@ import CreditCardForm from '../components/PaymentPage/CreditCardForm';
 
 import UPIDetails from '../components/PaymentPage/UPIDetails';
 import StepperWrapper from '../components/PaymentPage/StepperWrapper';
-import { useNavigate } from 'react-router-dom';
 import useProductStore from '../store/productStore';
-import { useEffect } from 'react';
 export default function Payment() {
-  const navigate = useNavigate();
-  const products = useProductStore((state) => state.products);
   const paymentMethods = useProductStore((state) => state.paymentMethods);
-
-  // useEffect(() => {
-  //   if (products.length == 0) {
-  //     // Redirect or handle the condition when there are no product
-  //     return navigate('/404');
-  //   }
-  // }, [products, navigate]);
 
   return (
     <Box

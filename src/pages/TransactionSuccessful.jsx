@@ -17,12 +17,12 @@ import OrderSummaryTable from '../components/TransactionSuccessful/OrderSummaryT
 import { useEffect } from 'react';
 
 export default function TransactionSuccessful() {
-  const { products, mode } = useProductStore();
+  const { products, paymentDone } = useProductStore();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (products.length == 0) return navigate('/404');
-  // }, [products, mode, navigate]);
+  useEffect(() => {
+    if (products.length == 0 || !paymentDone) return navigate('/404');
+  }, [products, navigate, paymentDone]);
 
   return (
     <Stack w='full' flexDirection={{ base: 'column', md: 'row' }}>

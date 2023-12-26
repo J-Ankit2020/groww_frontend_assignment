@@ -9,13 +9,18 @@ import {
 } from '@chakra-ui/react';
 import useProductStore from '../store/productStore';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function TransactionFailed() {
   const [isLoading, setIsLoading] = useState(false);
-  const products = useProductStore((state) => state.products);
-  const navigate = useNavigate();
   const paymentMethod = useProductStore((state) => state.paymentMode);
+
+  const { products, paymentDone } = useProductStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (products.length == 0 || !paymentDone) return navigate('/404');
+  }, [products, navigate, paymentDone]);
 
   const submitHandler = async () => {
     setIsLoading(true);
@@ -24,7 +29,6 @@ export default function TransactionFailed() {
       navigate('/');
     }, 800);
   };
-  if (products.length == 0 || !paymentMethod) return navigate('/');
   return (
     <Box
       mx='auto'

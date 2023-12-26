@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import Cookies from 'js-cookie';
 
 import fetchData from '../utils/http';
 import { getTotalCost } from '../utils/validation';
@@ -8,6 +7,7 @@ const productStore = (set) => ({
   products: [],
   paymentMethods: [],
   totalCost: 0,
+  paymentDone: false,
   isLoading: false,
   paymentMode: '',
 
@@ -30,14 +30,8 @@ const productStore = (set) => ({
         paymentMethods,
         totalCost,
         isLoading: false,
+        paymentDone: false,
       }));
-      Cookies.set(
-        'products',
-        JSON.stringify({ products, paymentMethods, totalCost }),
-        {
-          expires: 1, // Set the expiration time for the cookie (in days)
-        }
-      );
     } catch (error) {
       console.error('Error in fetchProducts:', error);
       set((state) => ({
@@ -45,6 +39,9 @@ const productStore = (set) => ({
         isLoading: false,
       }));
     }
+  },
+  setPaymentDone: (paymentDone) => {
+    set((state) => ({ ...state, paymentDone }));
   },
 
   setPaymentMode: (mode) => {

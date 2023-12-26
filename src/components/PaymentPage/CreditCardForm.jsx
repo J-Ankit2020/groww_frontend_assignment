@@ -17,7 +17,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import useProductStore from '../../store/productStore';
 export default function CreditCardForm() {
-  const setPaymentMode = useProductStore((state) => state.setPaymentMode);
+  const { setPaymentMode, setPaymentDone } = useProductStore();
   const navigate = useNavigate();
   const [cardNumber, setCreditCardNumber] = useState('');
   const [cvv, setCVV] = useState('');
@@ -62,8 +62,10 @@ export default function CreditCardForm() {
         setIsLoading(false);
 
         const isSuccessfull = Math.random() < 0.5;
-        if (isSuccessfull) return navigate('/transaction/success');
-        else return navigate('/transaction/fail');
+        setPaymentDone(true);
+        if (isSuccessfull) {
+          return navigate('/transaction/success');
+        } else return navigate('/transaction/fail');
       }, 800);
     }
   };
