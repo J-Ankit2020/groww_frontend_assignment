@@ -9,11 +9,11 @@ export default function OrderSummaryTable() {
       <Tbody>
         <Tr>
           <Td color='brand.foreground'>Subtotal</Td>
-          <Td color='brand.foreground'>3000</Td>
+          <Td color='brand.foreground'>{totalCost}</Td>
         </Tr>
         <Tr>
-          <Td color='brand.foreground'>Subtotal</Td>
-          <Td color='brand.foreground'>3000</Td>
+          <Td color='brand.foreground'>Discount</Td>
+          <Td color='brand.foreground'>0</Td>
         </Tr>
         <Tr>
           <Td color='brand.foreground'>Mode of payment</Td>

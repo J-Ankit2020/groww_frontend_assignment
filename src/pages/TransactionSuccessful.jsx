@@ -14,13 +14,15 @@ import useProductStore from '../store/productStore';
 import { Link, useNavigate } from 'react-router-dom';
 import OrderItem from '../components/TransactionSuccessful/OrderItem';
 import OrderSummaryTable from '../components/TransactionSuccessful/OrderSummaryTable';
+import { useEffect } from 'react';
 
 export default function TransactionSuccessful() {
-  const products = useProductStore((state) => state.products);
-  const mode = useProductStore((state) => state.paymentMode);
+  const { products, mode } = useProductStore();
   const navigate = useNavigate();
 
-  if (products.length == 0 || !mode) return navigate('/');
+  // useEffect(() => {
+  //   if (products.length == 0) return navigate('/404');
+  // }, [products, mode, navigate]);
 
   return (
     <Stack w='full' flexDirection={{ base: 'column', md: 'row' }}>
@@ -42,7 +44,7 @@ export default function TransactionSuccessful() {
         </Box>
         <Heading color='brand.primary'>Your Orders:</Heading>
         <Box>
-          <Grid templateColumns='repeat(4, 1fr)' gap='6' alignItems='center'>
+          <Grid templateColumns='repeat(4, 1fr)' gap='5' alignItems='center'>
             {products.map((product) => {
               return <OrderItem product={product} key={product.id} />;
             })}

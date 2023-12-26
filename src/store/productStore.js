@@ -1,4 +1,7 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import Cookies from 'js-cookie';
+
 import fetchData from '../utils/http';
 import { getTotalCost } from '../utils/validation';
 const productStore = (set) => ({
@@ -8,19 +11,15 @@ const productStore = (set) => ({
   isLoading: false,
   paymentMode: '',
 
-  merchantData: {},
   fetchProducts: async () => {
     try {
-      set((state) => ({ ...state, isLoading: true }));
+      set((state) => {
+        return { ...state, isLoading: true };
+      });
 
-      const [productsData, merchantData] = await Promise.all([
-        fetchData(
-          'https://groww-intern-assignment.vercel.app/v1/api/order-details'
-        ),
-        fetchData(
-          'https://groww-intern-assignment.vercel.app/v1/api/merchant-metadata'
-        ),
-      ]);
+      const productsData = await fetchData(
+        'https://groww-intern-assignment.vercel.app/v1/api/order-details'
+      );
 
       const { products, paymentMethods } = productsData;
       const totalCost = getTotalCost(products);
@@ -31,10 +30,14 @@ const productStore = (set) => ({
         paymentMethods,
         totalCost,
         isLoading: false,
-        merchantData,
       }));
-
-      return merchantData;
+      Cookies.set(
+        'products',
+        JSON.stringify({ products, paymentMethods, totalCost }),
+        {
+          expires: 1, // Set the expiration time for the cookie (in days)
+        }
+      );
     } catch (error) {
       console.error('Error in fetchProducts:', error);
       set((state) => ({
@@ -49,5 +52,5 @@ const productStore = (set) => ({
   },
 });
 
-const useProductStore = create(productStore);
+const useProductStore = create(persist(productStore, { name: 'product' }));
 export default useProductStore;

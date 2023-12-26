@@ -10,8 +10,8 @@ export default function GlobalSpinner() {
       mt='4'
       flexDir='column'
     >
-      <Spinner color='black.500' w='100px' h='100px' />
-      <Heading>Loading Please Wait....</Heading>
+      <Spinner color='brand.primary' w='100px' h='100px' />
+      <Heading color='brand.foreground'>Loading Please Wait....</Heading>
     </Box>
   );
 }

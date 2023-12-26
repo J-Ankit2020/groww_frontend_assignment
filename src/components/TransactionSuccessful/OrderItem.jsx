@@ -1,4 +1,4 @@
-import { AspectRatio, GridItem, Image, Text } from '@chakra-ui/react';
+import { AspectRatio, GridItem, HStack, Image, Text } from '@chakra-ui/react';
 import { Fragment } from 'react';
 
 export default function OrderItem({ product }) {
@@ -13,10 +13,15 @@ export default function OrderItem({ product }) {
         <Text color='brand.foreground'>{product.title}</Text>
       </GridItem>
       <GridItem>
-        <Text color='brand.foreground'>
-          {product.quantity} x {product.price} ={' '}
-          {product.price * product.quantity}
-        </Text>
+        <HStack
+          color='brand.foreground'
+          justify='space-evenly'
+          alignItems='center'
+        >
+          <Text>
+            {product.price} x {product.quantity}
+          </Text>
+        </HStack>
       </GridItem>
     </Fragment>
   );

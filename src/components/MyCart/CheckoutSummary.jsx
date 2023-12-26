@@ -1,22 +1,31 @@
 import {
   Box,
+  Button,
+  Divider,
   Flex,
   FormLabel,
   Grid,
   GridItem,
+  HStack,
   Icon,
   Text,
   chakra,
 } from '@chakra-ui/react';
-import Button from '../Button';
+import CustomButton from '../Button';
 import { IoLockClosed } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import useProductStore from '../../store/productStore';
-
+import useThemeStore from '../../store/themeStore';
 export default function CheckoutSummary() {
-  const totalCost = useProductStore((state) => state.totalCost);
-  const products = useProductStore((state) => state.products);
+  const { totalCost, products, fetchProducts } = useProductStore();
+  const { setTheme } = useThemeStore();
   const navigate = useNavigate();
+  const reloadCartHandler = async () => {
+    useProductStore.persist.clearStorage();
+    useThemeStore.persist.clearStorage();
+    fetchProducts();
+    setTheme();
+  };
   const checkoutHandler = () => {
     if (products.length > 0) return navigate('/pay');
   };
@@ -40,9 +49,14 @@ export default function CheckoutSummary() {
           outline='none'
           w='70%'
         />
-        <Button w={'30%'} fontWeight={'bold'} roundedRight='md' rounded='none'>
+        <CustomButton
+          w={'30%'}
+          fontWeight={'bold'}
+          roundedRight='md'
+          rounded='none'
+        >
           Submit
-        </Button>
+        </CustomButton>
       </Flex>
       <Grid
         templateColumns='repeat(2, 1fr)'
@@ -97,17 +111,34 @@ export default function CheckoutSummary() {
           </Text>
         </GridItem>
       </Grid>
-
-      <Button
+      <CustomButton
         onClick={checkoutHandler}
         mt={{ base: '7', md: 10 }}
         mx={'auto'}
         isDisabled={products.length === 0}
-        w={{ base: '98%', md: '85%' }}
+        w={{ base: '98%', md: '89%' }}
       >
         <Icon as={IoLockClosed} mr={1} />
         CHECKOUT
-      </Button>
+      </CustomButton>
+      <Divider w={{ base: '98%', md: '89%' }} mt='10' />
+      <HStack spacing={2} mt='3' justifyContent='center' align='center'>
+        <Text color='brand.foreground' fontWeight='bold'>
+          OR
+        </Text>
+        <Button
+          color='brand.primary'
+          variant='link'
+          display='block'
+          fontSize='large'
+          onClick={reloadCartHandler}
+          _active={{
+            color: 'brand.foreground',
+          }}
+        >
+          Reload The Cart
+        </Button>
+      </HStack>
     </Box>
   );
 }

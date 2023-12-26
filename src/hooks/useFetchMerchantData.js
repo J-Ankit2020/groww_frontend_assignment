@@ -1,36 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useProductStore from '../store/productStore';
+import useThemeStore from '../store/themeStore';
 
 // Custom hook for fetching merchant data
 const useFetchMerchantData = () => {
-  const [theme, setTheme] = useState({
-    background: '',
-    foreground: '',
-    primary: '',
-    'primary-foreground': '',
-  });
+  const { setTheme, theme } = useThemeStore();
 
-  const fetchProducts = useProductStore((state) => state.fetchProducts);
+  const { fetchProducts, products } = useProductStore();
 
   useEffect(() => {
-    async function fetchMerchantData() {
-      try {
-        const { theme } = await fetchProducts();
-        setTheme({
-          background: theme['--background'],
-          foreground: theme['--foreground'],
-          primary: theme['--primary'],
-          'primary-foreground': theme['--primary-foreground'],
-        });
-      } catch (error) {
-        // Handle error if needed
-        console.error('Error fetching merchant data:', error);
-      }
+    if (products && theme) {
+      return;
     }
-
-    fetchMerchantData();
-  }, [fetchProducts]);
-
+    fetchProducts();
+    setTheme();
+  }, [fetchProducts, setTheme, products, theme]);
   return theme;
 };
 

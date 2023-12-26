@@ -12,12 +12,12 @@ export default function Payment() {
   const products = useProductStore((state) => state.products);
   const paymentMethods = useProductStore((state) => state.paymentMethods);
 
-  useEffect(() => {
-    if (products.length == 0) {
-      // Redirect or handle the condition when there are no product
-      return navigate('/');
-    }
-  }, [products, navigate]);
+  // useEffect(() => {
+  //   if (products.length == 0) {
+  //     // Redirect or handle the condition when there are no product
+  //     return navigate('/404');
+  //   }
+  // }, [products, navigate]);
 
   return (
     <Box

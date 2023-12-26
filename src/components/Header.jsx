@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Image } from '@chakra-ui/react';
-import useProductStore from '../store/productStore';
+import useThemeStore from '../store/themeStore';
 const Header = () => {
-  const merchantData = useProductStore((state) => state.merchantData);
+  const merchantData = useThemeStore();
 
   return (
     <Box
@@ -23,7 +23,7 @@ const Header = () => {
         />
 
         <Heading size='md' ml={3}>
-          {merchantData?.merchantName || 'GROWW'}
+          {merchantData.merchantName || 'GROWW'}
         </Heading>
       </Flex>
     </Box>
