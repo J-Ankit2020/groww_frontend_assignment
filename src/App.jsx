@@ -1,42 +1,15 @@
-import { chakra, ChakraProvider, extendTheme } from '@chakra-ui/react';
-import './App.css';
-import Header from './components/Header';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import CartPage from './pages/CartPage';
-import Payment from './pages/Payment';
-import useFetchMerchantData from './hooks/useFetchMerchantData'; // Import the custom hook
-import TransactionFailed from './pages/TransactionFailed';
-import TransactionSuccessful from './pages/TransactionSuccessful';
-import ErrorPage from './pages/ErrorPage';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Root from './pages/Root';
 
-function App() {
-  const theme = useFetchMerchantData(); // Use the custom hook to fetch merchant data
+// Root component contains Routes and Route components
 
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <CartPage />,
-      errorElement: <ErrorPage />,
-    },
-    { path: '/pay', element: <Payment /> },
-    { path: '/transaction/fail', element: <TransactionFailed /> },
-    { path: '/transaction/success', element: <TransactionSuccessful /> },
-  ]);
+const router = createBrowserRouter([
+  {
+    path: '*',
+    Component: Root,
+  },
+]);
 
-  return (
-    <ChakraProvider
-      theme={extendTheme({
-        colors: {
-          brand: theme,
-        },
-      })}
-    >
-      <chakra.div className='App full' bg='brand.background' minH={'100vh'}>
-        <Header />
-        <RouterProvider router={router} />
-      </chakra.div>
-    </ChakraProvider>
-  );
+export default function App() {
+  return <RouterProvider router={router} />;
 }
-
-export default App;
