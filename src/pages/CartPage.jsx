@@ -1,13 +1,12 @@
 import { Box, Flex, Heading, Icon } from '@chakra-ui/react';
 import { MdOutlineShoppingBag } from 'react-icons/md';
-
 import OrderTable from '../components/MyCart/OrderTable';
 import CheckoutSummary from '../components/MyCart/CheckoutSummary';
 import useProductStore from '../store/productStore';
 import GlobalSpinner from '../components/GlobalSpinner';
 
 export default function CartPage() {
-  const isLoading = useProductStore((state) => state.isLoading);
+  const { isLoading } = useProductStore();
 
   if (isLoading) return <GlobalSpinner />;
   else

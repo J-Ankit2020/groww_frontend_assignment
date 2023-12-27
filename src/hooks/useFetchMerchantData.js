@@ -9,12 +9,11 @@ const useFetchMerchantData = () => {
   const { fetchProducts, products } = useProductStore();
 
   useEffect(() => {
-    if (products && theme) {
-      return;
+    if (products.length == 0 || !theme) {
+      fetchProducts();
+      setTheme();
     }
-    fetchProducts();
-    setTheme();
-  }, [fetchProducts, setTheme, products, theme]);
+  }, []);
   return theme;
 };
 

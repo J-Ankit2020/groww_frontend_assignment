@@ -49,5 +49,13 @@ const productStore = (set) => ({
   },
 });
 
-const useProductStore = create(persist(productStore, { name: 'product' }));
+const useProductStore = create(
+  persist(productStore, {
+    name: 'product',
+    partialize: (state) => {
+      const { isLoading, ...persistedState } = state;
+      return persistedState;
+    },
+  })
+);
 export default useProductStore;

@@ -7,12 +7,8 @@ import useFetchMerchantData from '../hooks/useFetchMerchantData'; // Import the 
 import TransactionFailed from '../pages/TransactionFailed';
 import TransactionSuccessful from '../pages/TransactionSuccessful';
 import ErrorPage from './ErrorPage';
-import useThemeStore from '../store/themeStore';
 export default function Root() {
-  useFetchMerchantData();
-
-  const { theme } = useThemeStore();
-
+  const theme = useFetchMerchantData();
   return (
     <ChakraProvider
       theme={extendTheme({
