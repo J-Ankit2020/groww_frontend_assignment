@@ -5,9 +5,14 @@ import CreditCardForm from '../components/PaymentPage/CreditCardForm';
 import UPIDetails from '../components/PaymentPage/UPIDetails';
 import StepperWrapper from '../components/PaymentPage/StepperWrapper';
 import useProductStore from '../store/productStore';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 export default function Payment() {
-  const paymentMethods = useProductStore((state) => state.paymentMethods);
-
+  const { paymentMethods, totalCost, products } = useProductStore();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (totalCost == 0 || products.length == 0) return navigate('/');
+  }, [totalCost, products, navigate]);
   return (
     <Box
       w='100%'
