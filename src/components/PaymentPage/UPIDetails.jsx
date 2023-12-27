@@ -17,7 +17,7 @@ export default function UPIDetails() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [upiId, setUpiId] = useState('');
-  const setPaymentMode = useProductStore((state) => state.setPaymentMode);
+  const { setPaymentMode, setPaymentDone } = useProductStore();
 
   const [error, setError] = useState(false);
 
@@ -32,8 +32,10 @@ export default function UPIDetails() {
         setPaymentMode('UPI');
         setIsLoading(false);
         const isSuccessfull = Math.random() < 0.5;
-        if (isSuccessfull) return navigate('/transaction/success');
-        else return navigate('/transaction/fail');
+        setPaymentDone(true);
+        if (isSuccessfull) {
+          return navigate('/transaction/success');
+        } else return navigate('/transaction/fail');
       }, 800);
     }
   }

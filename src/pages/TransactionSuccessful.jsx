@@ -20,9 +20,9 @@ export default function TransactionSuccessful() {
   const { products, paymentDone } = useProductStore();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (products.length == 0 || !paymentDone) return navigate('/404');
-  }, [products, navigate, paymentDone]);
+  // useEffect(() => {
+  //   if (products.length == 0 || !paymentDone) return navigate('/404');
+  // }, [products, navigate, paymentDone]);
 
   return (
     <Stack w='full' flexDirection={{ base: 'column', md: 'row' }}>

@@ -59,10 +59,10 @@ export default function CreditCardForm() {
       setIsLoading(true);
       setTimeout(() => {
         setPaymentMode('Credit Card');
+        setPaymentDone(true);
         setIsLoading(false);
 
         const isSuccessfull = Math.random() < 0.5;
-        setPaymentDone(true);
         if (isSuccessfull) {
           return navigate('/transaction/success');
         } else return navigate('/transaction/fail');
