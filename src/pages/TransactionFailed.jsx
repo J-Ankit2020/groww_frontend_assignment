@@ -18,9 +18,9 @@ export default function TransactionFailed() {
   const { products, paymentDone } = useProductStore();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (products.length == 0 || !paymentDone) return navigate('/404');
-  // }, [products, navigate, paymentDone]);
+  useEffect(() => {
+    if (products.length == 0 || !paymentDone) return navigate('/404');
+  }, [products, navigate, paymentDone]);
 
   const submitHandler = async () => {
     setIsLoading(true);
